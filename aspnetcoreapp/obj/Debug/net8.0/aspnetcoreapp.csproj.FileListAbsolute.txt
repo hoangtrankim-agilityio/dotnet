@@ -28,3 +28,4 @@
 /Users/hoangtran/Training/ASPNET/dotnet/aspnetcoreapp/obj/Debug/net8.0/aspnetcoreapp.pdb
 /Users/hoangtran/Training/ASPNET/dotnet/aspnetcoreapp/obj/Debug/net8.0/aspnetcoreapp.genruntimeconfig.cache
 /Users/hoangtran/Training/ASPNET/dotnet/aspnetcoreapp/obj/Debug/net8.0/ref/aspnetcoreapp.dll
+/Users/hoangtran/Training/ASPNET/dotnet/aspnetcoreapp/obj/Debug/net8.0/aspnetcoreapp.sourcelink.json

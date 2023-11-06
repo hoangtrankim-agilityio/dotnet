@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "dgSpecHash": "8LD7H72iFRMsktuhnw+a2QMzXafSE7JE74XeYT+Babk63GBZpCJGJfOm7gp4nYry9JwAVQ6abttUGBFAIRdaWg==",
+  "success": true,
+  "projectFilePath": "/Users/hoangtran/Training/ASPNET/dotnet/TodoMinimalApi/TodoMinimalApi.csproj",
+  "expectedPackageFiles": [
+    "/Users/hoangtran/.nuget/packages/microsoft.aspnetcore.diagnostics.entityframeworkcore/8.0.0-rc.2.23480.2/microsoft.aspnetcore.diagnostics.entityframeworkcore.8.0.0-rc.2.23480.2.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.entityframeworkcore/8.0.0-rc.2.23480.1/microsoft.entityframeworkcore.8.0.0-rc.2.23480.1.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.0-rc.2.23480.1/microsoft.entityframeworkcore.abstractions.8.0.0-rc.2.23480.1.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.0-rc.2.23480.1/microsoft.entityframeworkcore.analyzers.8.0.0-rc.2.23480.1.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.entityframeworkcore.inmemory/8.0.0-rc.2.23480.1/microsoft.entityframeworkcore.inmemory.8.0.0-rc.2.23480.1.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.entityframeworkcore.relational/8.0.0-rc.2.23480.1/microsoft.entityframeworkcore.relational.8.0.0-rc.2.23480.1.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.extensions.caching.abstractions/8.0.0-rc.2.23479.6/microsoft.extensions.caching.abstractions.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.extensions.caching.memory/8.0.0-rc.2.23479.6/microsoft.extensions.caching.memory.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0-rc.2.23479.6/microsoft.extensions.configuration.abstractions.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.0-rc.2.23479.6/microsoft.extensions.dependencyinjection.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0-rc.2.23479.6/microsoft.extensions.dependencyinjection.abstractions.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.extensions.logging/8.0.0-rc.2.23479.6/microsoft.extensions.logging.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0-rc.2.23479.6/microsoft.extensions.logging.abstractions.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.extensions.options/8.0.0-rc.2.23479.6/microsoft.extensions.options.8.0.0-rc.2.23479.6.nupkg.sha512",
+    "/Users/hoangtran/.nuget/packages/microsoft.extensions.primitives/8.0.0-rc.2.23479.6/microsoft.extensions.primitives.8.0.0-rc.2.23479.6.nupkg.sha512"
+  ],
+  "logs": []
+}

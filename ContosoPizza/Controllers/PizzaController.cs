@@ -34,7 +34,7 @@ public class PizzaController : ControllerBase
     public IActionResult Create(Pizza pizza)
     {
         PizzaService.Add(pizza);
-        return CreatedAtAction(nameof(Get), new { id = pizza.Id }, pizza)
+        return CreatedAtAction(nameof(Get), new { id = pizza.Id }, pizza);
     }
 
     // PUT action
