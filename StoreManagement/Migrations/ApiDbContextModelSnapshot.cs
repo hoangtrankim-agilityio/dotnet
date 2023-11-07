@@ -45,7 +45,7 @@ namespace StoreManagement.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("StoreManagement.Models.CartItem", b =>
@@ -81,7 +81,7 @@ namespace StoreManagement.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("StoreManagement.Models.Order", b =>
@@ -122,7 +122,7 @@ namespace StoreManagement.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("StoreManagement.Models.OrderItem", b =>
@@ -158,7 +158,7 @@ namespace StoreManagement.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("StoreManagement.Models.Product", b =>
@@ -193,7 +193,7 @@ namespace StoreManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("StoreManagement.Models.User", b =>
@@ -229,7 +229,7 @@ namespace StoreManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("StoreManagement.Models.Cart", b =>

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using StoreManagement.Data;
 using StoreManagement.Models;
 using StoreManagement.Filters;
+using StoreManagement.Wrappers;
+using StoreManagement.Helpers;
 
 namespace StoreManagement.Controllers
 {
@@ -35,7 +37,12 @@ namespace StoreManagement.Controllers
                             .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                             .Take(validFilter.PageSize)
                             .ToListAsync();
-            return pagedData;
+
+            // return pagedData;
+            // return Ok(new PagedResponse<List<User>>(pagedData, validFilter.PageNumber, validFilter.PageSize));
+            var totalRecords = await _context.Users.CountAsync();
+            var pagedReponse = PaginationHelper.CreatePagedReponse<User>(pagedData, validFilter, totalRecords);
+            return Ok(pagedReponse);
         }
 
         // GET: api/Users/5
@@ -53,7 +60,7 @@ namespace StoreManagement.Controllers
                 return NotFound();
             }
 
-            return user;
+            return Ok(new Response<User>(user));
         }
 
         // PUT: api/Users/5
