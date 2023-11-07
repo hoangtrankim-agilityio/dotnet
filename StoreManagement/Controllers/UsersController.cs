@@ -46,7 +46,7 @@ namespace StoreManagement.Controllers
           {
               return NotFound();
           }
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.Where(u => u.Id == id).Include(e => e.Cart).FirstAsync();
 
             if (user == null)
             {
