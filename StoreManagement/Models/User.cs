@@ -8,7 +8,7 @@ public class User : BaseEntity
 
     public Role Role { get; set; }
 
-    public Cart? cart { get; set; }
+    public Cart Cart { get; set; }
 }
 
 public enum Role

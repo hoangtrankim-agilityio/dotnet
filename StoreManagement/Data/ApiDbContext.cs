@@ -19,6 +19,11 @@ public class ApiDbContext : DbContext
                 .Property(p => p.Role)
                 .HasConversion<short>();
 
+        // modelBuilder.Entity<User>()
+        //         .HasOne(a => a.Cart)
+        //         .WithOne(b => b.User)
+        //         .HasForeignKey<Cart>(b => b.UserId);
+
         modelBuilder
                 .Entity<Cart>()
                 .Property(p => p.Status)
