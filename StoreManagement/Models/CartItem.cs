@@ -6,6 +6,7 @@ public class CartItem : BaseEntity
     public float Price { get; set; }
     public int Quantity { get; set; }
     public bool Active { get; set; }
-    public Cart Cart { get; set; } = null!;
-    public Product Product { get; set; } = null!;
+
+    public Cart? Cart { get; set; }
+    public Product? Product { get; set; }
 }

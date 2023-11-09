@@ -1,18 +1,18 @@
 namespace StoreManagement.Models;
 public class Order : BaseEntity
 {
-    public Guid UserId { get; set; }
     public float TotalPrice { get; set; }
     public float Discount { get; set; }
     public float Tax { get; set; }
 
     public float Shipping { get; set; }
 
-    public string ShippingAddress { get; set; }
+    public string ShippingAddress { get; set; } = null!;
 
+    public string UserId { get; set; }
     public OrderStatus Status { get; set; }
-    public User User { get; set; } = null!;
-    public virtual ICollection<OrderItem> OrderItems { get; set; }
+    public User? User { get; set; }
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = null!;
 }
 
 public enum OrderStatus

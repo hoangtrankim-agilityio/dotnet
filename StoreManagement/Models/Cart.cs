@@ -2,9 +2,9 @@ namespace StoreManagement.Models;
 public class Cart : BaseEntity
 {
     public CartStatus Status { get; set; }
-    public Guid UserId { get; set; }
-    // public User User { get; set; }
-    public virtual ICollection<CartItem>? CartItems { get; set; }
+    public string UserId { get; set; }
+    public User? User { get; set; }
+    public ICollection<CartItem> CartItems { get; } = new List<CartItem>();
 }
 
 public enum CartStatus
