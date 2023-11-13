@@ -40,7 +40,8 @@ namespace StoreManagement.Controllers
           {
               return NotFound();
           }
-            var cart = await _context.Carts.FindAsync(id);
+            // var cart = await _context.Carts.FindAsync(id);
+            var cart = await _context.Carts.Include(e => e.CartItems).FirstOrDefaultAsync(e => e.Id == id);
 
             if (cart == null)
             {

@@ -2,18 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StoreManagement.Data;
 
 #nullable disable
 
-namespace StoreManagement.Migrations
+namespace StoreManagement.Data.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231113030944_InitialModel")]
+    partial class InitialModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,7 +157,7 @@ namespace StoreManagement.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.Cart", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.Cart", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -178,10 +181,10 @@ namespace StoreManagement.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.CartItem", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.CartItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -214,10 +217,10 @@ namespace StoreManagement.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.Order", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -256,10 +259,10 @@ namespace StoreManagement.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.OrderItem", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.OrderItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -292,10 +295,10 @@ namespace StoreManagement.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.Product", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -327,10 +330,10 @@ namespace StoreManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.User", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -368,10 +371,6 @@ namespace StoreManagement.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
@@ -413,7 +412,7 @@ namespace StoreManagement.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("StoreManagement.Models.User", null)
+                    b.HasOne("StoreManagement.Core.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -422,7 +421,7 @@ namespace StoreManagement.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("StoreManagement.Models.User", null)
+                    b.HasOne("StoreManagement.Core.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -437,7 +436,7 @@ namespace StoreManagement.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StoreManagement.Models.User", null)
+                    b.HasOne("StoreManagement.Core.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -446,33 +445,33 @@ namespace StoreManagement.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("StoreManagement.Models.User", null)
+                    b.HasOne("StoreManagement.Core.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.Cart", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.Cart", b =>
                 {
-                    b.HasOne("StoreManagement.Models.User", "User")
+                    b.HasOne("StoreManagement.Core.Models.User", "User")
                         .WithOne("Cart")
-                        .HasForeignKey("StoreManagement.Models.Cart", "UserId")
+                        .HasForeignKey("StoreManagement.Core.Models.Cart", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.CartItem", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.CartItem", b =>
                 {
-                    b.HasOne("StoreManagement.Models.Cart", "Cart")
+                    b.HasOne("StoreManagement.Core.Models.Cart", "Cart")
                         .WithMany("CartItems")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StoreManagement.Models.Product", "Product")
+                    b.HasOne("StoreManagement.Core.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -483,9 +482,9 @@ namespace StoreManagement.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.Order", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.Order", b =>
                 {
-                    b.HasOne("StoreManagement.Models.User", "User")
+                    b.HasOne("StoreManagement.Core.Models.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -494,15 +493,15 @@ namespace StoreManagement.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.OrderItem", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.OrderItem", b =>
                 {
-                    b.HasOne("StoreManagement.Models.Order", "Order")
+                    b.HasOne("StoreManagement.Core.Models.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StoreManagement.Models.Product", "Product")
+                    b.HasOne("StoreManagement.Core.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -513,17 +512,17 @@ namespace StoreManagement.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.Cart", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.Cart", b =>
                 {
                     b.Navigation("CartItems");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.Order", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });
 
-            modelBuilder.Entity("StoreManagement.Models.User", b =>
+            modelBuilder.Entity("StoreManagement.Core.Models.User", b =>
                 {
                     b.Navigation("Cart");
 

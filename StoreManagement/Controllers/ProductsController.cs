@@ -10,6 +10,7 @@ using StoreManagement.Models;
 using StoreManagement.Filters;
 using StoreManagement.Wrappers;
 using StoreManagement.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StoreManagement.Controllers
 {
@@ -26,7 +27,7 @@ namespace StoreManagement.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct([FromQuery] PaginationFilter filter, [FromQuery] string filterByName)
+        public async Task<ActionResult<IEnumerable<Product>>> GetProduct([FromQuery] PaginationFilter filter)
         {
             if (_context.Products == null)
             {
@@ -35,7 +36,6 @@ namespace StoreManagement.Controllers
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
             var pagedData = await _context.Products
                 .OrderBy(c => c.Name)
-                .Where(p => p.Name == filterByName)
                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                 .Take(validFilter.PageSize)
                 .ToListAsync();
@@ -64,6 +64,7 @@ namespace StoreManagement.Controllers
 
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(Guid id, Product product)
         {
@@ -95,6 +96,7 @@ namespace StoreManagement.Controllers
 
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
@@ -109,6 +111,7 @@ namespace StoreManagement.Controllers
         }
 
         // DELETE: api/Products/5
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(Guid id)
         {

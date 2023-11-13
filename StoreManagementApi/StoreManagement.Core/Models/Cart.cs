@@ -1,4 +1,4 @@
-namespace StoreManagement.Models;
+namespace StoreManagement.Core.Models;
 public class Cart : BaseEntity
 {
     public CartStatus Status { get; set; }
