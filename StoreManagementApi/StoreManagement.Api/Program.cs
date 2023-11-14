@@ -1,20 +1,30 @@
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using StoreManagement.Data;
 using StoreManagement.Core.Models;
-using StoreManagement.Core.Validation;
+using StoreManagement.Core;
 using System.Text;
 using FluentValidation.AspNetCore;
-using System.Reflection;
+using StoreManagement.Core.Services;
+using StoreManagement.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+// Use Serilog
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IProductService, ProductService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
                 {
@@ -25,7 +35,15 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddDbContext<ApiDbContext>(opt =>
                 opt.UseNpgsql(builder.Configuration.GetConnectionString("StoreDbConnection")));
 
-builder.Services.AddIdentity<User, IdentityRole>()
+builder.Services.AddIdentity<User, IdentityRole>(options => {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.User.RequireUniqueEmail = true;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                })
                 .AddEntityFrameworkStores<ApiDbContext>()
                 .AddDefaultTokenProviders();
 

@@ -44,6 +44,7 @@ namespace StoreManagement.Controllers
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response<User>(status: "Error", message: "User already exists!"));
 
+
             User user = new User()
             {
                 Email = model.Email,

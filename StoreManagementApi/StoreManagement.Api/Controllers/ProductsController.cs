@@ -11,6 +11,7 @@ using StoreManagement.Core.Validation;
 using StoreManagement.Api.Filters;
 using StoreManagement.Api.Wrappers;
 using StoreManagement.Api.Helpers;
+using StoreManagement.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace StoreManagement.Controllers
@@ -20,10 +21,14 @@ namespace StoreManagement.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly ApiDbContext _context;
+        private readonly IProductService _productService;
+        private readonly ILogger<ProductsController> _logger;
 
-        public ProductsController(ApiDbContext context)
+        public ProductsController(ApiDbContext context, IProductService productService, ILogger<ProductsController> logger)
         {
             _context = context;
+            this._productService = productService;
+            _logger = logger;
         }
 
         // GET: api/Products
@@ -41,8 +46,9 @@ namespace StoreManagement.Controllers
                 .Take(validFilter.PageSize)
                 .ToListAsync();
             var totalRecords = await _context.Products.CountAsync();
-            var pagedReponse = PaginationHelper.CreatePagedReponse<Product>(pagedData, validFilter, totalRecords);
-            return Ok(pagedReponse);
+            var pagedResponse = PaginationHelper.CreatePagedReponse<Product>(pagedData, validFilter, totalRecords);
+            _logger.LogInformation("Response: {res} ", pagedData);
+            return Ok(pagedResponse);
         }
 
         // GET: api/Products/5
@@ -53,7 +59,8 @@ namespace StoreManagement.Controllers
           {
               return NotFound();
           }
-            var product = await _context.Products.FindAsync(id);
+
+            var product = await _productService.GetProductById(id);
 
             if (product == null)
             {
@@ -111,10 +118,6 @@ namespace StoreManagement.Controllers
                 return Problem("Entity set 'ApiDbContext.Product'  is null.");
             }
 
-            // if (!ModelState.IsValid)
-            // {
-            //     return StatusCode(StatusCodes.Status400BadRequest, ModelState);
-            // }
             ProductValidator productValidator = new();
             var validatorResult = productValidator.Validate(product);
 
