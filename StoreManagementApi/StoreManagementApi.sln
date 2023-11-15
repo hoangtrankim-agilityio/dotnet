@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Data", "Sto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Services", "StoreManagement.Services\StoreManagement.Services.csproj", "{EB97AF0A-6AF1-4991-BC43-8C5EA142292A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreManagement.Tests", "StoreManagement.Tests\StoreManagement.Tests.csproj", "{010C4F35-52BF-4D41-AF3D-199C498B7D64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{EB97AF0A-6AF1-4991-BC43-8C5EA142292A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB97AF0A-6AF1-4991-BC43-8C5EA142292A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB97AF0A-6AF1-4991-BC43-8C5EA142292A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{010C4F35-52BF-4D41-AF3D-199C498B7D64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{010C4F35-52BF-4D41-AF3D-199C498B7D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{010C4F35-52BF-4D41-AF3D-199C498B7D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{010C4F35-52BF-4D41-AF3D-199C498B7D64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
