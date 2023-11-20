@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using StoreManagement.Data;
 using StoreManagement.Core.Models;
 using StoreManagement.Core.Validation;
-using StoreManagement.Api.Filters;
+using StoreManagement.Core.Filters;
 using StoreManagement.Api.Wrappers;
 using StoreManagement.Api.Helpers;
 using StoreManagement.Core.Services;
@@ -40,11 +40,7 @@ namespace StoreManagement.Controllers
                   return NotFound();
             }
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
-            var pagedData = await _context.Products
-                .OrderBy(c => c.Name)
-                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                .Take(validFilter.PageSize)
-                .ToListAsync();
+            var pagedData = await _productService.GetProductsByFilter(filter);
             var totalRecords = await _context.Products.CountAsync();
             var pagedResponse = PaginationHelper.CreatePagedReponse<Product>(pagedData, validFilter, totalRecords);
             _logger.LogInformation("Response: {res} ", pagedData);
@@ -129,7 +125,8 @@ namespace StoreManagement.Controllers
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+            // return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
         // DELETE: api/Products/5

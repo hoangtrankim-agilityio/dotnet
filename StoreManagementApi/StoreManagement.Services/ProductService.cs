@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using StoreManagement.Core;
 using StoreManagement.Core.Models;
 using StoreManagement.Core.Services;
+using StoreManagement.Core.Filters;
 
 namespace StoreManagement.Services
 {
@@ -17,6 +18,11 @@ namespace StoreManagement.Services
         public async Task<Product> GetProductById(Guid id)
         {
             return await _unitOfWork.Products.GetProductByIdAsync(id);
+        }
+
+        public async Task<List<Product>> GetProductsByFilter(PaginationFilter filter)
+        {
+            return await _unitOfWork.Products.GetProductsByFilterAsync(filter);
         }
     }
 }

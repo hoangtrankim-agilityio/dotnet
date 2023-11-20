@@ -11,12 +11,14 @@ using System.Text;
 using System.Threading.Tasks;
 using StoreManagement.Data;
 using StoreManagement.Core.Models;
-using StoreManagement.Api.Filters;
+using StoreManagement.Core.Filters;
 using StoreManagement.Api.Wrappers;
 using StoreManagement.Api.Helpers;
 using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
+using StoreManagement.Api.Resources;
 
 namespace StoreManagement.Controllers
 {
@@ -28,12 +30,14 @@ namespace StoreManagement.Controllers
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
 
-        public UsersController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        public UsersController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IMapper mapper)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             _configuration = configuration;
+            this._mapper = mapper;
         }
 
         [HttpPost]
@@ -142,8 +146,8 @@ namespace StoreManagement.Controllers
             {
                 return NotFound();
             }
-
-            return user;
+            var userResources = _mapper.Map<User, UserResource>(user);
+            return Ok(userResources);
         }
 
          // GET: api/Users
@@ -156,13 +160,15 @@ namespace StoreManagement.Controllers
                 return NotFound();
             }
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
-            var pagedData = await userManager.Users
+            var users = await userManager.Users
                 .OrderBy(c => c.UserName)
                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                 .Take(validFilter.PageSize)
                 .ToListAsync();
+
+            var pagedData = _mapper.Map<List<User>, List<UserResource>>(users);
             var totalRecords = await userManager.Users.CountAsync();
-            var pagedReponse = PaginationHelper.CreatePagedReponse<User>(pagedData, validFilter, totalRecords);
+            var pagedReponse = PaginationHelper.CreatePagedReponse<UserResource>(pagedData, validFilter, totalRecords);
             return Ok(pagedReponse);
         }
     }
