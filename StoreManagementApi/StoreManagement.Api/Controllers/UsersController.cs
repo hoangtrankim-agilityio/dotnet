@@ -1,20 +1,13 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using StoreManagement.Data;
 using StoreManagement.Core.Models;
 using StoreManagement.Core.Filters;
 using StoreManagement.Api.Wrappers;
 using StoreManagement.Api.Helpers;
-using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
@@ -141,7 +134,7 @@ namespace StoreManagement.Controllers
         public async Task<ActionResult<User>> GetUser(string username)
         {
             // var user = await userManager.FindByNameAsync(username);
-            var user = await userManager.Users.Include(e => e.Cart).FirstOrDefaultAsync(e => e.UserName == username);
+            var user = await userManager.Users.Include(e => e.Cart).Include(e => e.Orders).ThenInclude(i => i.OrderItems).FirstOrDefaultAsync(e => e.UserName == username);
             if (user == null)
             {
                 return NotFound();

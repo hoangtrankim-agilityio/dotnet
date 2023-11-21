@@ -6,5 +6,5 @@ public class UserResource
     public string Email { get; set; }
     public string UserName { get; set; }
     public CartResource Cart { get; set; }
-
+    public ICollection<OrderResource>? Orders { get; set; }
 }

@@ -28,6 +28,7 @@ builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsi
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
                 {

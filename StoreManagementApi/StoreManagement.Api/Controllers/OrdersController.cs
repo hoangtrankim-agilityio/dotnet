@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StoreManagement.Data;
 using StoreManagement.Core.Models;
+using StoreManagement.Api.Resources;
+using StoreManagement.Core.Services;
 
 namespace StoreManagement.Controllers
 {
@@ -15,57 +13,58 @@ namespace StoreManagement.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly ApiDbContext _context;
+        private readonly IOrderService _orderService;
+        private readonly IMapper _mapper;
 
-        public OrdersController(ApiDbContext context)
+        public OrdersController(ApiDbContext context, IMapper mapper, IOrderService orderService)
         {
             _context = context;
+            _mapper = mapper;
+            _orderService = orderService;
         }
 
         // GET: api/Orders
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrders([FromQuery] string? UserId)
         {
-          if (_context.Orders == null)
-          {
-              return NotFound();
-          }
-            return await _context.Orders.ToListAsync();
+            if (_context.Orders == null)
+            {
+                return NotFound();
+            }
+            var orders = await  _orderService.GetOrders();
+            if (UserId != null) {
+                orders = await _orderService.GetOrdersByUserId(UserId);
+            }
+            var result = _mapper.Map<List<Order>, List<OrderResource>>(orders);
+            return Ok(result);
         }
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(Guid id)
         {
-          if (_context.Orders == null)
-          {
-              return NotFound();
-          }
-            // var order = await _context.Orders.FindAsync(id);
-            var order = await _context.Orders.Where(u => u.Id == id).Include(e => e.OrderItems).FirstAsync();
-
+            if (_context.Orders == null)
+            {
+                return NotFound();
+             }
+            var order = await _orderService.GetOrderById(id);
             if (order == null)
             {
                 return NotFound();
             }
-
-            return order;
+            var result = _mapper.Map<Order, OrderResource>(order);
+            return Ok(result);
         }
+
 
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(Guid id, Order order)
+        public async Task<IActionResult> PutOrder(Guid id,[FromBody] OrderStatus status, [FromBody] string shippingAddress)
         {
-            if (id != order.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(order).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _orderService.UpdateOrder(id, status, shippingAddress);
             }
             catch (DbUpdateConcurrencyException)
             {

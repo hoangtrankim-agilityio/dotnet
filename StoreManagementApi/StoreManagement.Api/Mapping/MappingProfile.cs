@@ -11,12 +11,16 @@ namespace StoreManagement.Api.Mapping
             // Domain to Resource
             CreateMap<User, UserResource>();
             CreateMap<Cart, CartResource>();
+            CreateMap<Product, ProductResource>();
+            CreateMap<Order, OrderResource>();
+            CreateMap<OrderItem, OrderItemResource>();
 
             // Resource to Domain
             CreateMap<UserResource, User>();
-            // CreateMap<SaveMusicResource, Music>();
             CreateMap<CartResource, Cart>();
-            // CreateMap<SaveArtistResource, Artist>();
+            CreateMap<ProductResource, Product>();
+            CreateMap<OrderResource, Order>();
+            CreateMap<OrderItemResource, OrderItem>();
         }
     }
 }
