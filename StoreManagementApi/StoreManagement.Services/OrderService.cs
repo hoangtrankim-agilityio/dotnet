@@ -27,11 +27,10 @@ namespace StoreManagement.Services
             return await _unitOfWork.Orders.GetOrdersAsync();
         }
 
-        public async Task UpdateOrder(Guid id, OrderStatus status, string? shippingAddress)
+        public async Task UpdateOrder(Guid id, OrderStatus status)
         {
             var updateOrder = await _unitOfWork.Orders.GetByIdAsync(id);
             updateOrder.Status = status;
-            updateOrder.ShippingAddress = shippingAddress;
             await _unitOfWork.CommitAsync();
         }
     }

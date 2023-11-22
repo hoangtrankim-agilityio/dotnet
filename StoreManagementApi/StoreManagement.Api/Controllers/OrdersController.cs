@@ -60,11 +60,11 @@ namespace StoreManagement.Controllers
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(Guid id,[FromBody] OrderStatus status, [FromBody] string shippingAddress)
+        public async Task<IActionResult> PutOrder(Guid id, [FromBody] OrderStatus status)
         {
             try
             {
-                await _orderService.UpdateOrder(id, status, shippingAddress);
+                await _orderService.UpdateOrder(id, status);
             }
             catch (DbUpdateConcurrencyException)
             {

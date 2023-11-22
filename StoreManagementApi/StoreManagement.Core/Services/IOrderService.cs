@@ -10,6 +10,6 @@ namespace StoreManagement.Core.Services
         Task<List<Order>> GetOrdersByUserId(string id);
         Task<Order> GetOrderById(Guid id);
         Task<List<Order>> GetOrders();
-        Task UpdateOrder(Guid id, OrderStatus status, string shippingAddress);
+        Task UpdateOrder(Guid id, OrderStatus status);
     }
 }

@@ -2,12 +2,16 @@ using System.Threading.Tasks;
 using StoreManagement.Core;
 using StoreManagement.Core.Repositories;
 using StoreManagement.Data.Repositories;
+using Microsoft.AspNetCore.Identity;
+using StoreManagement.Core.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace StoreManagement.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApiDbContext _context;
+        // private readonly IdentityDbContext _identityContext;
         private ProductRepository _productRepository;
         private OrderRepository _orderRepository;
 

@@ -10,6 +10,7 @@ using System.Text;
 using FluentValidation.AspNetCore;
 using StoreManagement.Core.Services;
 using StoreManagement.Services;
+using StoreManagement.Api.Middleware;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,7 @@ builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsi
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
                 {
@@ -101,5 +103,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<RequestResponseLoggingMiddleware>();
 
 app.Run();
