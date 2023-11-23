@@ -108,3 +108,5 @@ app.MapControllers();
 app.UseMiddleware<RequestResponseLoggingMiddleware>();
 
 app.Run();
+
+public partial class Program { }

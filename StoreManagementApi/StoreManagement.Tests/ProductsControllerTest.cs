@@ -5,7 +5,7 @@ using StoreManagement.Core;
 using Microsoft.AspNetCore.Mvc;
 using StoreManagement.Data;
 using StoreManagement.Core.Services;
-using StoreManagement.Api.Filters;
+using StoreManagement.Core.Filters;
 using Moq;
 using Moq.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
