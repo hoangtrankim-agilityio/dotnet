@@ -14,6 +14,7 @@ namespace StoreManagement.Data
         // private readonly IdentityDbContext _identityContext;
         private ProductRepository _productRepository;
         private OrderRepository _orderRepository;
+        private CartRepository _cartRepository;
 
         public UnitOfWork(ApiDbContext context)
         {
@@ -21,6 +22,7 @@ namespace StoreManagement.Data
         }
         public IProductRepository Products => _productRepository = _productRepository ?? new ProductRepository(_context);
         public IOrderRepository Orders => _orderRepository = _orderRepository ?? new OrderRepository(_context);
+        public ICartRepository Carts => _cartRepository = _cartRepository ?? new CartRepository(_context);
         public async Task<int> CommitAsync()
         {
             return await _context.SaveChangesAsync();

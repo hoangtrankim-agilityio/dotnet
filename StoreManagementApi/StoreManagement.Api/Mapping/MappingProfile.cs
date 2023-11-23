@@ -14,6 +14,7 @@ namespace StoreManagement.Api.Mapping
             CreateMap<Product, ProductResource>();
             CreateMap<Order, OrderResource>();
             CreateMap<OrderItem, OrderItemResource>();
+            CreateMap<CartItem, CartItemResource>();
 
             // Resource to Domain
             CreateMap<UserResource, User>();
@@ -21,6 +22,7 @@ namespace StoreManagement.Api.Mapping
             CreateMap<ProductResource, Product>();
             CreateMap<OrderResource, Order>();
             CreateMap<OrderItemResource, OrderItem>();
+            CreateMap<CartItemResource, CartItem>();
         }
     }
 }

@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StoreManagement.Data;
 using StoreManagement.Core.Models;
+using StoreManagement.Core.Services;
+using StoreManagement.Api.Resources;
 
 namespace StoreManagement.Controllers
 {
@@ -15,40 +13,48 @@ namespace StoreManagement.Controllers
     public class CartsController : ControllerBase
     {
         private readonly ApiDbContext _context;
-
-        public CartsController(ApiDbContext context)
+        private readonly ICartService _cartService;
+        private readonly IMapper _mapper;
+        public CartsController(ApiDbContext context, IMapper mapper, ICartService cartService)
         {
             _context = context;
+            _mapper = mapper;
+            _cartService = cartService;
         }
 
         // GET: api/Carts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cart>>> GetCarts()
+        public async Task<ActionResult<IEnumerable<Cart>>> GetCarts([FromQuery] string? UserId)
         {
-          if (_context.Carts == null)
-          {
-              return NotFound();
-          }
-            return await _context.Carts.ToListAsync();
+            if (_context.Carts == null)
+            {
+                return NotFound();
+            }
+            var carts = await _cartService.GetCarts();
+            if (UserId != null) {
+                carts = await _cartService.GetCartsByUserId(UserId);
+            }
+            var result = _mapper.Map<List<Cart>, List<CartResource>>(carts);
+            return Ok(result);
         }
 
         // GET: api/Carts/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Cart>> GetCart(Guid id)
         {
-          if (_context.Carts == null)
-          {
-              return NotFound();
-          }
+            if (_context.Carts == null)
+            {
+                return NotFound();
+            }
             // var cart = await _context.Carts.FindAsync(id);
-            var cart = await _context.Carts.Include(e => e.CartItems).FirstOrDefaultAsync(e => e.Id == id);
+            var cart = await _cartService.GetCartById(id);
 
             if (cart == null)
             {
                 return NotFound();
             }
-
-            return cart;
+            var result = _mapper.Map<Cart, CartResource>(cart);
+            return Ok(result);
         }
 
         // PUT: api/Carts/5

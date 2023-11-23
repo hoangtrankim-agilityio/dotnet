@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StoreManagement.Data;
@@ -90,11 +85,6 @@ namespace StoreManagement.Controllers
           {
               return Problem("Entity set 'ApiDbContext.CartItems'  is null.");
           }
-            // CartItem cartItem1 = new CartItem();
-            // cartItem1.CartId = cartItem.CartId;
-            // cartItem1.ProductId = cartItem.ProductId;
-            // cartItem1.Quantity = cartItem.Quantity;
-            // cartItem1.Price = cartItem.Price;
             _context.CartItems.Add(cartItem);
             await _context.SaveChangesAsync();
 
