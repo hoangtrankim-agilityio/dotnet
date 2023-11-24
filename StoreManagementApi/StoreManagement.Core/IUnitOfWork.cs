@@ -9,6 +9,8 @@ namespace StoreManagement.Core
         IProductRepository Products { get; }
         IOrderRepository Orders { get; }
         ICartRepository Carts { get; }
+
+        ICartItemRepository CartItems { get; }
         Task<int> CommitAsync();
     }
 }

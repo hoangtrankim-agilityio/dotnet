@@ -32,6 +32,7 @@ builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICartService, CartService>();
+builder.Services.AddTransient<ICartItemService, CartItemService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
                 {

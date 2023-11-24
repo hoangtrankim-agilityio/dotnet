@@ -1,7 +1,10 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StoreManagement.Data;
 using StoreManagement.Core.Models;
+using StoreManagement.Core.Services;
+using StoreManagement.Api.Resources;
 
 namespace StoreManagement.Controllers
 {
@@ -10,85 +13,89 @@ namespace StoreManagement.Controllers
     public class CartItemsController : ControllerBase
     {
         private readonly ApiDbContext _context;
+        private readonly ICartItemService _cartItemService;
 
-        public CartItemsController(ApiDbContext context)
+        private readonly IMapper _mapper;
+
+        public CartItemsController(ApiDbContext context, IMapper mapper, ICartItemService cartItemService)
         {
             _context = context;
+            _mapper = mapper;
+            _cartItemService = cartItemService;
         }
 
         // GET: api/CartItems
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CartItem>>> GetCartItems()
-        {
-          if (_context.CartItems == null)
-          {
-              return NotFound();
-          }
-            return await _context.CartItems.ToListAsync();
-        }
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<CartItem>>> GetCartItems()
+        // {
+        //   if (_context.CartItems == null)
+        //   {
+        //       return NotFound();
+        //   }
+        //     return await _context.CartItems.ToListAsync();
+        // }
 
         // GET: api/CartItems/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CartItem>> GetCartItem(Guid id)
-        {
-          if (_context.CartItems == null)
-          {
-              return NotFound();
-          }
-            var cartItem = await _context.CartItems.FindAsync(id);
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<CartItem>> GetCartItem(Guid id)
+        // {
+        //   if (_context.CartItems == null)
+        //   {
+        //       return NotFound();
+        //   }
+        //     var cartItem = await _context.CartItems.FindAsync(id);
 
-            if (cartItem == null)
-            {
-                return NotFound();
-            }
+        //     if (cartItem == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-            return cartItem;
-        }
+        //     return cartItem;
+        // }
 
         // PUT: api/CartItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCartItem(Guid id, CartItem cartItem)
-        {
-            if (id != cartItem.Id)
-            {
-                return BadRequest();
-            }
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> PutCartItem(Guid id, CartItem cartItem)
+        // {
+        //     if (id != cartItem.Id)
+        //     {
+        //         return BadRequest();
+        //     }
 
-            _context.Entry(cartItem).State = EntityState.Modified;
+        //     _context.Entry(cartItem).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CartItemExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //     try
+        //     {
+        //         await _context.SaveChangesAsync();
+        //     }
+        //     catch (DbUpdateConcurrencyException)
+        //     {
+        //         if (!CartItemExists(id))
+        //         {
+        //             return NotFound();
+        //         }
+        //         else
+        //         {
+        //             throw;
+        //         }
+        //     }
 
-            return NoContent();
-        }
+        //     return NoContent();
+        // }
 
         // POST: api/CartItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<CartItem>> PostCartItem(CartItem cartItem)
         {
-          if (_context.CartItems == null)
-          {
-              return Problem("Entity set 'ApiDbContext.CartItems'  is null.");
-          }
-            _context.CartItems.Add(cartItem);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCartItem", new { id = cartItem.Id }, cartItem);
+            if (_context.CartItems == null)
+            {
+                return Problem("Entity set 'ApiDbContext.CartItems'  is null.");
+            }
+            var result = await _cartItemService.CreateCartItem(cartItem);
+            var cartItemResource = _mapper.Map<CartItem, CartItemResource>(result);
+            return Ok(cartItemResource);
         }
 
         // DELETE: api/CartItems/5
@@ -99,14 +106,13 @@ namespace StoreManagement.Controllers
             {
                 return NotFound();
             }
-            var cartItem = await _context.CartItems.FindAsync(id);
+            var cartItem = await _cartItemService.GetCartById(id);
             if (cartItem == null)
             {
                 return NotFound();
             }
 
-            _context.CartItems.Remove(cartItem);
-            await _context.SaveChangesAsync();
+            await _cartItemService.DeleteCartItem(cartItem);
 
             return NoContent();
         }
