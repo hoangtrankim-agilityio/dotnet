@@ -17,7 +17,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
-    <PackageReference Include="Microsoft.NETCore.App"/>
     <PackageReference Include="NSwag.AspNetCore" />
     <PackageReference Include="NSwag.MSBuild">
       <PrivateAssets>all</PrivateAssets>
