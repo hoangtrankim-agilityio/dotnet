@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using StoreManagementApiCA.Domain.Constants;
 using StoreManagementApiCA.Domain.Entities;
-using StoreManagementApiCA.Infrastructure.Identity;
+using StoreManagementApiCA.Domain.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

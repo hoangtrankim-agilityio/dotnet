@@ -1,4 +1,6 @@
 ﻿using StoreManagementApiCA.Application.Common.Models;
+using StoreManagementApiCA.Domain.Identity;
+using StoreManagementApiCA.Application.Users.Queries.GetUsersWithPagination;
 
 namespace StoreManagementApiCA.Application.Common.Interfaces;
 
@@ -13,4 +15,6 @@ public interface IIdentityService
     Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password);
 
     Task<Result> DeleteUserAsync(string userId);
+
+    Task<List<ApplicationUser>> GetApplicationUsersAsync(GetUsersWithPaginationQuery filter);
 }

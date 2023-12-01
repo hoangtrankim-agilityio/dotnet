@@ -1,32 +1,43 @@
-using StoreManagementApiCA.Application.Common.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using StoreManagementApiCA.Application.Common.Mappings;
 using StoreManagementApiCA.Application.Common.Models;
-using StoreManagementApiCA.Domain.Entities;
+using StoreManagementApiCA.Domain.Identity;
+using StoreManagementApiCA.Application.Common.Security;
+using StoreManagementApiCA.Domain.Constants;
 
-namespace StoreManagementApiCA.Application.Users.Queries.GetProductsWithPagination;
+namespace StoreManagementApiCA.Application.Users.Queries.GetUsersWithPagination;
 
-public record GetProductsWithPaginationQuery : IRequest<PaginatedList<UserDto>>
+[Authorize(Roles = Roles.Administrator)]
+public record GetUsersWithPaginationQuery : IRequest<PaginatedList<UserDto>>
 {
     public int PageNumber { get; init; } = 1;
     public int PageSize { get; init; } = 10;
 }
 
-public class GetProductsWithPaginationQueryHandler : IRequestHandler<GetProductsWithPaginationQuery, PaginatedList<ProductDto>>
+public class GetUsersWithPaginationQueryHandler : IRequestHandler<GetUsersWithPaginationQuery, PaginatedList<UserDto>>
 {
-    private readonly IApplicationDbContext _context;
+    // private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
+    private readonly UserManager<ApplicationUser> _userManager;
+    // private readonly IIdentityService _identityService;
 
-    public GetProductsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetUsersWithPaginationQueryHandler(IMapper mapper, UserManager<ApplicationUser> userManager)
     {
-        _context = context;
+        // _context = context;
         _mapper = mapper;
+        _userManager = userManager;
+        // _identityService = identityService;
     }
 
-    public async Task<PaginatedList<ProductDto>> Handle(GetProductsWithPaginationQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<UserDto>> Handle(GetUsersWithPaginationQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Products
-            .OrderBy(x => x.Name)
-            .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
-            .PaginatedListAsync(request.PageNumber, request.PageSize);
+        var users = await _userManager.Users
+                .OrderBy(c => c.UserName)
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
+                .PaginatedListAsync(request.PageNumber, request.PageSize);
+
+        return users;
     }
 }
