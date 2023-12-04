@@ -12,7 +12,7 @@ using StoreManagementApiCA.Infrastructure.Data;
 namespace StoreManagementApiCA.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231201082632_Initialize")]
+    [Migration("20231204033659_Initialize")]
     partial class Initialize
     {
         /// <inheritdoc />
@@ -433,7 +433,7 @@ namespace StoreManagementApiCA.Infrastructure.Data.Migrations
                     b.ToTable("TodoLists");
                 });
 
-            modelBuilder.Entity("StoreManagementApiCA.Domain.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("StoreManagementApiCA.Infrastructure.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -508,7 +508,7 @@ namespace StoreManagementApiCA.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("StoreManagementApiCA.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("StoreManagementApiCA.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -517,7 +517,7 @@ namespace StoreManagementApiCA.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("StoreManagementApiCA.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("StoreManagementApiCA.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -532,7 +532,7 @@ namespace StoreManagementApiCA.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StoreManagementApiCA.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("StoreManagementApiCA.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -541,7 +541,7 @@ namespace StoreManagementApiCA.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("StoreManagementApiCA.Domain.Identity.ApplicationUser", null)
+                    b.HasOne("StoreManagementApiCA.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

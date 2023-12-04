@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using StoreManagementApiCA.Application.Common.Interfaces;
 using StoreManagementApiCA.Domain.Entities;
-using StoreManagementApiCA.Domain.Identity;
+using StoreManagementApiCA.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

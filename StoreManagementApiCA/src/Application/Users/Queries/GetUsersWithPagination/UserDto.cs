@@ -1,6 +1,4 @@
-using StoreManagementApiCA.Application.Common.Interfaces;
-using StoreManagementApiCA.Domain.Constants;
-using StoreManagementApiCA.Domain.Identity;
+using StoreManagementApiCA.Application.Common.Models;
 
 namespace StoreManagementApiCA.Application.Users.Queries.GetUsersWithPagination;
 
@@ -15,7 +13,7 @@ public class UserDto
     {
         public Mapping()
         {
-            CreateMap<ApplicationUser, UserDto>();
+            CreateMap<IdentityAppUser, UserDto>();
         }
     }
 }

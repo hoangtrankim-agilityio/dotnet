@@ -25,6 +25,7 @@ public class GetCartWithUserIdQueryHandler : IRequestHandler<GetCartWithUserIdQu
     {
         return await _context.Carts
             .Where(x => x.UserId == request.UserId)
+            .Include(x => x.CartItems)
             .OrderBy(x => x.Name)
             .ProjectTo<CartDto>(_mapper.ConfigurationProvider)
             .FirstAsync();

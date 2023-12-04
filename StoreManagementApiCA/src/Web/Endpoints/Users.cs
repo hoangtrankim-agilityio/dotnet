@@ -1,4 +1,4 @@
-﻿using StoreManagementApiCA.Domain.Identity;
+﻿using StoreManagementApiCA.Infrastructure.Identity;
 namespace StoreManagementApiCA.Web.Endpoints;
 using StoreManagementApiCA.Application.Common.Models;
 using StoreManagementApiCA.Application.Users.Queries.GetUsersWithPagination;
@@ -13,7 +13,7 @@ public class Users : EndpointGroupBase
 
     }
 
-    public async Task<PaginatedList<UserDto>> GetUsersWithPagination(ISender sender, [AsParameters] GetUsersWithPaginationQuery query)
+    public async Task<List<UserDto>> GetUsersWithPagination(ISender sender, [AsParameters] GetUsersWithPaginationQuery query)
     {
         return await sender.Send(query);
     }

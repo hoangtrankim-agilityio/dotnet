@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace StoreManagementApiCA.Domain.Identity;
+namespace StoreManagementApiCA.Infrastructure.Identity;
 
 public class ApplicationUser : IdentityUser
 {

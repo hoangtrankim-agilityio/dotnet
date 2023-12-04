@@ -1,10 +1,10 @@
 ﻿using StoreManagementApiCA.Application.Common.Interfaces;
 using StoreManagementApiCA.Application.Common.Models;
-using StoreManagementApiCA.Domain.Identity;
 using StoreManagementApiCA.Application.Users.Queries.GetUsersWithPagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace StoreManagementApiCA.Infrastructure.Identity;
 
@@ -81,7 +81,7 @@ public class IdentityService : IIdentityService
         return result.ToApplicationResult();
     }
 
-    public async Task<List<ApplicationUser>> GetApplicationUsersAsync(GetUsersWithPaginationQuery request)
+    public async Task<List<IdentityAppUser>> GetApplicationUsersAsync(GetUsersWithPaginationQuery request)
     {
         var users = await _userManager.Users
                 .OrderBy(c => c.UserName)
@@ -89,6 +89,12 @@ public class IdentityService : IIdentityService
                 .Take(request.PageSize)
                 .ToListAsync();
 
-        return users;
+        var identityUser = users.Select(u => new IdentityAppUser() {
+            Id = u.Id,
+            Email = u.Email,
+            Name = u.UserName
+        }).ToList();
+
+        return identityUser;
     }
 }

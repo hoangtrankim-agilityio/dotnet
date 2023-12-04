@@ -3,7 +3,6 @@ using StoreManagementApiCA.Domain.Constants;
 using StoreManagementApiCA.Infrastructure.Data;
 using StoreManagementApiCA.Infrastructure.Data.Interceptors;
 using StoreManagementApiCA.Infrastructure.Identity;
-using StoreManagementApiCA.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
