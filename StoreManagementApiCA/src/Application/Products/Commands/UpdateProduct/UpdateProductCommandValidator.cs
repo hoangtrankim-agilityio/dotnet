@@ -1,4 +1,4 @@
-namespace StoreManagementApiCA.Application.Products.Commands.UpdateTodoItem;
+namespace StoreManagementApiCA.Application.Products.Commands.UpdateProduct;
 
 public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
 {

@@ -270,8 +270,8 @@ namespace StoreManagementApiCA.Infrastructure.Data.Migrations
                     b.Property<float>("TotalPrice")
                         .HasColumnType("real");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

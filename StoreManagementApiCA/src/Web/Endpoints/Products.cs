@@ -1,7 +1,7 @@
 using StoreManagementApiCA.Application.Common.Models;
 using StoreManagementApiCA.Application.Products.Commands.CreateProduct;
-using StoreManagementApiCA.Application.Products.Commands.DeleteTodoItem;
-using StoreManagementApiCA.Application.Products.Commands.UpdateTodoItem;
+using StoreManagementApiCA.Application.Products.Commands.DeleteProduct;
+using StoreManagementApiCA.Application.Products.Commands.UpdateProduct;
 using StoreManagementApiCA.Application.Products.Queries.GetProductsWithPagination;
 
 namespace StoreManagementApiCA.Web.Endpoints;

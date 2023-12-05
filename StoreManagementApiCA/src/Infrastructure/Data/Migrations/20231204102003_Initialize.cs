@@ -81,7 +81,7 @@ namespace StoreManagementApiCA.Infrastructure.Data.Migrations
                     Tax = table.Column<float>(type: "real", nullable: false),
                     Shipping = table.Column<float>(type: "real", nullable: false),
                     ShippingAddress = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),

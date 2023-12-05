@@ -2,7 +2,7 @@ using StoreManagementApiCA.Application.Common.Interfaces;
 using StoreManagementApiCA.Application.Common.Security;
 using StoreManagementApiCA.Domain.Constants;
 
-namespace StoreManagementApiCA.Application.Products.Commands.DeleteTodoItem;
+namespace StoreManagementApiCA.Application.Products.Commands.DeleteProduct;
 
 [Authorize(Roles = Roles.Administrator)]
 public record DeleteProductCommand(int Id) : IRequest;

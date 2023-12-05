@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity;
 using StoreManagementApiCA.Application.Common.Mappings;
 using StoreManagementApiCA.Application.Common.Models;
 using StoreManagementApiCA.Application.Common.Interfaces;

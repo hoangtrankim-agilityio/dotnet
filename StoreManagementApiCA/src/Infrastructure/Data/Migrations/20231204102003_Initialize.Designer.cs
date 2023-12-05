@@ -12,7 +12,7 @@ using StoreManagementApiCA.Infrastructure.Data;
 namespace StoreManagementApiCA.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231204033659_Initialize")]
+    [Migration("20231204102003_Initialize")]
     partial class Initialize
     {
         /// <inheritdoc />
@@ -273,8 +273,8 @@ namespace StoreManagementApiCA.Infrastructure.Data.Migrations
                     b.Property<float>("TotalPrice")
                         .HasColumnType("real");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

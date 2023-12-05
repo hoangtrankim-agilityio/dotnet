@@ -1,6 +1,5 @@
-using StoreManagementApiCA.Application.Common.Models;
 using StoreManagementApiCA.Application.CartItems.Commands.CreateCart;
-using StoreManagementApiCA.Application.Carts.Queries.GetCartByUserId;
+using StoreManagementApiCA.Application.CartItems.Commands.UpdateCartItem;
 
 namespace StoreManagementApiCA.Web.Endpoints;
 
@@ -10,17 +9,19 @@ public class CartItems : EndpointGroupBase
     {
         app.MapGroup(this)
             .RequireAuthorization()
-            // .MapGet(GetCartByUserId, "GetCartByUserId")
+            .MapPut(UpdateCartItem, "{id}")
             .MapPost(CreateCartItem);
     }
-
-    // public async Task<CartDto> GetCartByUserId(ISender sender, [AsParameters] GetCartWithUserIdQuery query)
-    // {
-    //     return await sender.Send(query);
-    // }
 
     public async Task<int> CreateCartItem(ISender sender, CreateCartItemCommand command)
     {
         return await sender.Send(command);
+    }
+
+    public async Task<IResult> UpdateCartItem(ISender sender, int id, UpdateCartItemCommand command)
+    {
+        if (id != command.Id) return Results.BadRequest();
+        await sender.Send(command);
+        return Results.NoContent();
     }
 }

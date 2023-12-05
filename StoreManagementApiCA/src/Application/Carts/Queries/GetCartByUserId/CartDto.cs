@@ -6,7 +6,7 @@ public class CartDto
 {
     public int Id { get; set; }
     public string? Name { get; set; }
-    public int CartStatus { get; init; }
+    public string? Status { get; init; }
     public CartDto()
     {
         CartItems = Array.Empty<CartItemDto>();

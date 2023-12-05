@@ -4,7 +4,6 @@ using StoreManagementApiCA.Application.Users.Queries.GetUsersWithPagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace StoreManagementApiCA.Infrastructure.Identity;
 

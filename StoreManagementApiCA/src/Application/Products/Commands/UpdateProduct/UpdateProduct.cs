@@ -3,7 +3,7 @@ using StoreManagementApiCA.Application.Common.Security;
 using StoreManagementApiCA.Domain.Entities;
 using StoreManagementApiCA.Domain.Constants;
 
-namespace StoreManagementApiCA.Application.Products.Commands.UpdateTodoItem;
+namespace StoreManagementApiCA.Application.Products.Commands.UpdateProduct;
 
 [Authorize(Roles = Roles.Administrator)]
 public record UpdateProductCommand : IRequest

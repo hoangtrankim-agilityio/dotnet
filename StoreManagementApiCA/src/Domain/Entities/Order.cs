@@ -10,8 +10,8 @@ public class Order : BaseAuditableEntity
 
     public string? ShippingAddress { get; set; }
 
-    public int UserId { get; set; }
+    public string? UserId { get; set; }
     public OrderStatus Status { get; set; } = OrderStatus.NewOrder;
 
-    public IList<OrderItem> OrderItems { get; private set; } = new List<OrderItem>();
+    public IList<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }
