@@ -1,4 +1,4 @@
-using StoreManagementApiCA.Application.CartItems.Commands.CreateCart;
+using StoreManagementApiCA.Application.CartItems.Commands.CreateCartItem;
 using StoreManagementApiCA.Application.CartItems.Commands.UpdateCartItem;
 
 namespace StoreManagementApiCA.Web.Endpoints;

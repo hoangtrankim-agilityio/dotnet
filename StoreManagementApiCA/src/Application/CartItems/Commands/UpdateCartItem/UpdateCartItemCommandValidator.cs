@@ -1,5 +1,3 @@
-using StoreManagementApiCA.Application.CartItems.Commands.CreateCart;
-
 namespace StoreManagementApiCA.Application.CartItems.Commands.UpdateCartItem;
 
 public class UpdateCartItemCommandValidator : AbstractValidator<UpdateCartItemCommand>

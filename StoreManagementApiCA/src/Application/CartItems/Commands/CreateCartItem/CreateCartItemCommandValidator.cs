@@ -1,4 +1,4 @@
-using StoreManagementApiCA.Application.CartItems.Commands.CreateCart;
+using StoreManagementApiCA.Application.CartItems.Commands.CreateCartItem;
 
 namespace StoreManagementApiCA.Application.Products.Commands.CreateProduct;
 

@@ -2,7 +2,7 @@ using StoreManagementApiCA.Application.Common.Interfaces;
 using StoreManagementApiCA.Domain.Entities;
 using StoreManagementApiCA.Domain.Enums;
 
-namespace StoreManagementApiCA.Application.CartItems.Commands.CreateCart;
+namespace StoreManagementApiCA.Application.CartItems.Commands.CreateCartItem;
 
 public record CreateCartItemCommand : IRequest<int>
 {
